@@ -1,0 +1,37 @@
+name: Simple Practice Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simple-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Success Message
+        run: echo "GitHub Actions is working successfully!"
+
+      - name: Show Current Date
+        run: date
+
+      - name: List Repository Files
+        run: ls -la
+
+      - name: Create Result File
+        run: |
+          echo "GitHub Actions Practice Completed Successfully" > result.txt
+          echo "Date and Time:" >> result.txt
+          date >> result.txt
+          echo "Repository Files:" >> result.txt
+          ls -la >> result.txt
+
+      - name: Upload Result File
+        uses: actions/upload-artifact@v4
+        with:
+          name: practice-result
+          path: result.txt
